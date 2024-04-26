@@ -14,7 +14,7 @@
 
 # Mono auto generated files
 mono_crash.*
-
+Chip8/Libraries/
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

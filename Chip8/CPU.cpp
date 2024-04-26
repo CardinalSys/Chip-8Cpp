@@ -45,14 +45,39 @@ public:
 			file.read(buffer, size);
 			file.close();
 
-			for (long i = 0; i < size; ++i)
-			{
+			for (long i = 0; i < size; ++i){
 				memory[0x200 + i] = buffer[i];
 			}
 
 			delete[] buffer;
 		}
 
+	}
+
+	void Cycle() {
+		for (int i = 0; i < speed; i++) {
+			if (!isPaused){
+				uint16_t opcode = (memory[programCounter] << 8 || memory[programCounter + 1]);
+				ExecuteInstruction(opcode);
+			}
+		}
+	}
+
+	void UpdateTimers() {
+		if (delayTimer > 0)
+			delayTimer -= 1;
+
+		if (soundTimer > 0)
+			delayTimer -= 1;
+	}
+
+	void ExecuteInstruction(uint16_t opcode) {
+		programCounter += 2;
+
+		uint8_t x = (opcode & 0x0F00) >> 8;
+		uint8_t y = (opcode & 0x00F0) >> 4;
+
+		//Compare the opcode
 	}
 
 
@@ -65,4 +90,6 @@ private:
 	uint8_t soundTimer = 0;
 	uint16_t programCounter = 0;
 	uint16_t stack[16];
+	uint8_t speed = 10;
+	bool isPaused = false;
 };
