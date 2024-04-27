@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
     renderer.SetPixel(1, 4);
     auto startTime = std::chrono::steady_clock::now();
     std::cout << "Test" << std::endl;
-    cpu.LoadRomIntoMemory("D:\\projects\\javascript\\chip8\\roms\\tetris");
+    cpu.LoadRomIntoMemory("D:\\projects\\javascript\\chip8\\roms\\BLINKY");
 
     while (true) {
         renderer.RenderCycle();
